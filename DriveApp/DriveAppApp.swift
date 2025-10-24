@@ -9,9 +9,23 @@ import SwiftUI
 
 @main
 struct DriveAppApp: App {
+    @State private var isReady = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                if isReady {
+                    ContentView()
+                        .transition(.opacity)
+                } else {
+                    SplashView()
+                        .transition(.opacity)
+                }
+            }
+            .task {
+                try? await Task.sleep(nanoseconds: 1000_000_000)
+                withAnimation(.easeInOut(duration: 0.25)) { isReady = true }
+            }
         }
     }
 }

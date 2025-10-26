@@ -17,7 +17,7 @@ struct SplashView: View {
                 Image("logo")
                     .scaleEffect(appear ? 1.0 : 0.8)
                     .opacity(appear ? 1.0 : 0.0)
-                    .animation(.spring(response: 0.6, dampingFraction: 0.8), value: appear)
+                    .animation(.easeInOut(duration: 1), value: appear)
                     .padding(.bottom, 29)
                 
                 HStack {

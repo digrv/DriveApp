@@ -8,15 +8,20 @@
 import SwiftUI
 
 @main
-struct DriveAppApp: App {
+struct DriveApp: App {
     @State private var isReady = false
+    @AppStorage(AppStorageKeys.hasSeenOnboarding) private var hasSeenOnboarding = false
     
     var body: some Scene {
         WindowGroup {
             ZStack {
                 if isReady {
-                    ContentView()
-                        .transition(.opacity)
+                    if hasSeenOnboarding {
+                        EmptyView()
+                    } else {
+                        OnboardingView()
+                            .transition(.opacity)
+                    }
                 } else {
                     SplashView()
                         .transition(.opacity)
